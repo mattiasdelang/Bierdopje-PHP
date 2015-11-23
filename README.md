@@ -1,4 +1,4 @@
-# bierdopje-php
+# bierdopje-php ![Build Status](https://travis-ci.org/mattiasdelang/bierdopje-php.svg?branch=master)
 PHP wrapper for Bierdopje API
 
 
