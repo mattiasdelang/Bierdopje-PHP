@@ -1,9 +1,9 @@
 language: php
-
 php:
-  - 5.6
-
+- 5.6
 before_script:
-  - composer install --dev --prefer-source --no-interaction
-
+- composer install --dev --prefer-source --no-interaction
 script: vendor/bin/phpunit tests
+env:
+  matrix:
+    secure: Q59ORD9cHt04sAIeiD+r4dJ6n9VeD4GRTu1TJIxJ92FbzqxVFVIMNWoSEMH7H8klnU8GJM3JdxrMTJaGunu7xJLp5kj8eisF9haxJkVvAAvGqkvNFKiC6SK0qWMr4bYCGtl0RmtONBWS4CyTPj6mxwCSOpBVqwL9sBo9LTAfpcd3iaW81oTirK7WPGWhLuM+58YBI4Yt0+nkTQF42jMk1kb3mxbV/IU/BPbOc/u4RgaT2r06hfYTIiiFkidB0PQPUTEiNoxSJ/hYfJIQnO0UjlwTOiDpMduThuXLFKINDBFTAnbOIt3fzlNxHAFcOQBshGdX+OMPOtNuGRAo+RdSqvhIH79Rj0RZyuhR3IEAKTUi0ybq4+F1gn6iph7DwvsZgeQZzl4osmG3JWteUxT48qHF2lHbMaaUWSGzUkEFmBEmECtXz9jTg0wJQkjSBIpzThVeEuvcmYWwWuyG/jXaFKulpnod46PsUVAUbZd9iKTARkjiKuToAlCGuHCSgpXfLakl5GG5Z2LPIPvYGDSPsFCb+lusHeyjQz67h3gBg9zkik1/rgy8Y1iYtp3dyGiPejYEux5AwDHW2eBfOxhjIOI+oNAloEpt4hWPNUjWYUvJ9TZ5Chu+jZj8MmoV3sIpoFD6woE0sFvHcsG5Aj62RMTFtfT/0duBx9IP86pV7uA=
