@@ -4,7 +4,6 @@ namespace mattiasdelang;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use JMS\Serializer\Serializer;
 
 class Bierdopje
 {
@@ -19,16 +18,9 @@ class Bierdopje
    */
   protected $client;
 
-  /**
-   * @var Serializer
-   */
-  private $serializer;
-
-  public function __construct(Client $client, Serializer $serializer)
+  public function __construct(Client $client)
   {
     $this->client = $client;
-    $this->serializer = $serializer;
-
     $this->url .= getenv('BD_APIKEY');
   }
 
