@@ -155,18 +155,21 @@ class Bierdopje
     if ($response->getStatusCode() != 200)
       throw new \Exception('Bierdopje.com not available');
 
-    $response = xmlToObj($response->getBody());
+    $response = $this->xmlToObj($response->getBody());
     return $response;
   }
 
+  /**
+   * Convert XML string to object
+   * @param $fileContents
+   * @return \SimpleXMLElement
+   */
+  private function xmlToObj($fileContents)
+  {
+    $fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
+    $fileContents = trim(str_replace('"', "'", $fileContents));
+    $simpleXml    = simplexml_load_string($fileContents, null, LIBXML_NOCDATA);
 
-}
-
-function xmlToObj($fileContents)
-{
-  $fileContents = str_replace(array("\n", "\r", "\t"), '', $fileContents);
-  $fileContents = trim(str_replace('"', "'", $fileContents));
-  $simpleXml = simplexml_load_string($fileContents, null, LIBXML_NOCDATA);
-
-  return $simpleXml;
+    return $simpleXml;
+  }
 }
