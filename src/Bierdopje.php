@@ -9,7 +9,7 @@ class Bierdopje
 {
 
   /**
-   * Bierdopje constructor.
+   * @var string
    */
   protected $url = 'http://api.bierdopje.com/';
 
@@ -18,12 +18,22 @@ class Bierdopje
    */
   protected $client;
 
+  /**
+   * Create Bierdopje API instance
+   * @param Client $client
+   */
   public function __construct(Client $client)
   {
     $this->client = $client;
     $this->url .= getenv('BD_APIKEY');
   }
 
+  /**
+   * Search a show by name
+   * @param $showName
+   * @return null|\stdClass
+   * @throws \Exception
+   */
   public function getShowByName($showName)
   {
     $response = $this->request('/FindShowByName/' . $showName);
@@ -38,6 +48,12 @@ class Bierdopje
     return $show;
   }
 
+  /**
+   * Search a show by a TVDB showId
+   * @param $id
+   * @return \stdClass
+   * @throws \Exception
+   */
   public function getShowByTvdbId($id)
   {
     $response = $this->request('/GetShowByTVDBID/' . $id);
@@ -49,6 +65,13 @@ class Bierdopje
 
   }
 
+  /**
+   * Search episodes by season and Bierdopje showId
+   * @param $id
+   * @param $season
+   * @return array|null
+   * @throws \Exception
+   */
   public function getEpisodesOfSeason($id, $season)
   {
     $response = $this->request('/GetEpisodesForSeason/' . $id . '/' . $season);
@@ -64,6 +87,12 @@ class Bierdopje
     return $episodeList;
   }
 
+  /**
+   * Search episodes by a Bierdopje showId
+   * @param $id
+   * @return array|null
+   * @throws \Exception
+   */
   public function getEpisodesOfShow($id)
   {
     $response = $this->request('/GetAllEpisodesForShow/' . $id);
@@ -79,6 +108,12 @@ class Bierdopje
     return $episodeList;
   }
 
+  /**
+   * Search an episode by its Bierdopje Id
+   * @param $id
+   * @return \stdClass
+   * @throws \Exception
+   */
   public function getEpisodeById($id)
   {
     $response = $this->request('/GetEpisodeById/' . $id);
@@ -89,6 +124,11 @@ class Bierdopje
 
   }
 
+  /**
+   * Format an Episode response
+   * @param $original
+   * @return \stdClass
+   */
   private function formatEpisode($original)
   {
     $show = new \stdClass();
@@ -111,6 +151,11 @@ class Bierdopje
     return $show;
   }
 
+  /**
+   * Format a Show response
+   * @param $original
+   * @return \stdClass
+   */
   private function formatShow($original)
   {
     $show = new \stdClass();
@@ -145,8 +190,9 @@ class Bierdopje
   }
 
   /**
-   * @param $showName
-   * @return \Psr\Http\Message\ResponseInterface|\SimpleXMLElement
+   * Make an HTTP request and format the XML resposne
+   * @param $path
+   * @return \SimpleXMLElement
    * @throws \Exception
    */
   protected function request($path)
