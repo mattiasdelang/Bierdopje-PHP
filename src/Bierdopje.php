@@ -170,11 +170,3 @@ function xmlToObj($fileContents)
 
   return $simpleXml;
 }
-
-function dd($data)
-{
-  echo '<pre>';
-  var_dump($data);
-  echo '</pre>';
-  exit;
-}
