@@ -13,7 +13,11 @@ class Bierdopje extends PHPUnit_Framework_TestCase
 
   protected function setUp()
   {
-    $httpClient = new \GuzzleHttp\Client();
+    $httpClient = new \GuzzleHttp\Client([
+      'headers' => [
+        'User-Agent' => 'mattiasdelang/bierdopje-php/1.0.1'
+      ]
+    ]);
     $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
     $bierdopje = new Api($httpClient, $serializer);
