@@ -50,31 +50,28 @@ class Bierdopje
 
   /**
    * Search a show by a TVDB showId
-   * @param $id
+   * @param $tvdbId
    * @return \stdClass
    * @throws \Exception
    */
-  public function getShowByTvdbId($id)
+  public function getShowByTvdbId($tvdbId)
   {
-    $response = $this->request('/GetShowByTVDBID/' . $id);
-
+    $response = $this->request('/GetShowByTVDBID/' . $tvdbId);
     $show = $this->formatShow($response->response);
 
     return $show;
-
-
   }
 
   /**
    * Search episodes by season and Bierdopje showId
-   * @param $id
+   * @param $showId
    * @param $season
    * @return array|null
    * @throws \Exception
    */
-  public function getEpisodesOfSeason($id, $season)
+  public function getEpisodesOfSeason($showId, $season)
   {
-    $response = $this->request('/GetEpisodesForSeason/' . $id . '/' . $season);
+    $response = $this->request('/GetEpisodesForSeason/' . $showId . '/' . $season);
 
     $episodes = $response->response->results->result;
     if (count($episodes) <= 0)
@@ -89,13 +86,13 @@ class Bierdopje
 
   /**
    * Search episodes by a Bierdopje showId
-   * @param $id
+   * @param $showId
    * @return array|null
    * @throws \Exception
    */
-  public function getEpisodesOfShow($id)
+  public function getEpisodesOfShow($showId)
   {
-    $response = $this->request('/GetAllEpisodesForShow/' . $id);
+    $response = $this->request('/GetAllEpisodesForShow/' . $showId);
 
     $episodes = $response->response->results->result;
     if (count($episodes) <= 0)
@@ -110,18 +107,17 @@ class Bierdopje
 
   /**
    * Search an episode by its Bierdopje Id
-   * @param $id
+   * @param $episodeId
    * @return \stdClass
    * @throws \Exception
    */
-  public function getEpisodeById($id)
+  public function getEpisodeById($episodeId)
   {
-    $response = $this->request('/GetEpisodeById/' . $id);
+    $response = $this->request('/GetEpisodeById/' . $episodeId);
     $episode = $response->response->results;
     $episode = $this->formatEpisode($episode);
 
     return $episode;
-
   }
 
   /**
