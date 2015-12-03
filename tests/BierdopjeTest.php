@@ -18,9 +18,8 @@ class Bierdopje extends PHPUnit_Framework_TestCase
         'User-Agent' => 'mattiasdelang/bierdopje-php/1.0.1'
       ]
     ]);
-    $serializer = \JMS\Serializer\SerializerBuilder::create()->build();
 
-    $bierdopje = new Api($httpClient, $serializer);
+    $bierdopje = new Api($httpClient);
     $this->api = $bierdopje;
   }
 
