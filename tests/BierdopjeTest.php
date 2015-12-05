@@ -1,9 +1,7 @@
 <?php
-
 use mattiasdelang\Bierdopje as Api;
 
-class Bierdopje extends PHPUnit_Framework_TestCase
-{
+class Bierdopje extends PHPUnit_Framework_TestCase {
 
   /**
    * @var \mattiasdelang\Bierdopje
@@ -18,7 +16,6 @@ class Bierdopje extends PHPUnit_Framework_TestCase
         'User-Agent' => 'mattiasdelang/bierdopje-php/1.0.1'
       ]
     ]);
-
     $bierdopje = new Api($httpClient);
     $this->api = $bierdopje;
   }
@@ -38,11 +35,9 @@ class Bierdopje extends PHPUnit_Framework_TestCase
     #$this->assertEquals($show->nextEpisode->format('d-m-Y'), '27-01-2016');
     $this->assertTrue($show->seasons >= 4, 'There are more than 4 seasons');
     $this->assertTrue($show->episodes >= 93, 'There are more than 93 episodes');
-
     $this->assertTrue(in_array('Action', $show->genres), 'Genres contains "Action"');
     $this->assertTrue(in_array('Adventure', $show->genres), 'Genres contains "Adventure"');
     $this->assertTrue(in_array('Crime', $show->genres), 'Genres contains "Crime"');
-
     $this->assertTrue(strlen($show->summary) > 100, 'The summary has more than 100 chars');
   }
 
@@ -51,7 +46,6 @@ class Bierdopje extends PHPUnit_Framework_TestCase
    */
   public function test_it_fetches_shows_by_tvdbId()
   {
-
     $show = $this->api->getShowBytvdbId(257655);
 
     $this->assertEquals($show->id, 16290);
@@ -62,11 +56,9 @@ class Bierdopje extends PHPUnit_Framework_TestCase
     #$this->assertEquals($show->nextEpisode->format('d-m-Y'), '27-01-2016');
     $this->assertTrue($show->seasons >= 4);
     $this->assertTrue($show->episodes >= 93);
-
     $this->assertTrue(in_array('Action', $show->genres));
     $this->assertTrue(in_array('Adventure', $show->genres));
     $this->assertTrue(in_array('Crime', $show->genres));
-
     $this->assertTrue(strlen($show->summary) > 100);
   }
 
@@ -78,9 +70,7 @@ class Bierdopje extends PHPUnit_Framework_TestCase
     $episodes = $this->api->getEpisodesOfSeason(16290, 2);
 
     $this->assertEquals(count($episodes), 24);
-
     $episode = $episodes[0];
-
     $this->assertEquals($episode->id, 772542);
     $this->assertEquals($episode->tvdbId, 4599381);
     $this->assertEquals($episode->title, "City of Heroes");
@@ -101,7 +91,6 @@ class Bierdopje extends PHPUnit_Framework_TestCase
 
     $this->assertTrue(count($episodes) >= 93);
     $episode = $episodes[0];
-
     $this->assertEquals($episode->id, 814124);
     $this->assertEquals($episode->tvdbId, 4659835);
     $this->assertEquals($episode->title, "Year One");

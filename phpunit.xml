@@ -9,16 +9,17 @@
          processIsolation="false"
          stopOnFailure="false"
          syntaxCheck="false"
-    >
+        >
 
 
-  <testsuites>
-    <testsuite name="Bierdopje-PHP Test Suite">
-      <directory>./tests/</directory>
-    </testsuite>
-  </testsuites>
+    <testsuites>
+        <testsuite name="Bierdopje-PHP Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
 
-  <listeners>
-    <listener class="PHPUnit_Util_Log_VCR" file="vendor/php-vcr/phpunit-testlistener-vcr/PHPUnit/Util/Log/VCR.php"/>
-  </listeners>
+    <listeners>
+        <listener class="PHPUnit_Util_Log_VCR"
+                  file="vendor/php-vcr/phpunit-testlistener-vcr/PHPUnit/Util/Log/VCR.php"/>
+    </listeners>
 </phpunit>
