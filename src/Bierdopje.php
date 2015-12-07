@@ -28,6 +28,26 @@ class Bierdopje {
   }
 
   /**
+   * Get a show by Bierdopje showId
+   *
+   * @param $showId
+   *
+   * @return \SimpleXMLElement[]|\stdClass
+   * @throws \Exception
+   */
+  public function getShowById($showId)
+  {
+    $response = $this->request('/GetShowById/' . $showId);
+    if ( $response->response->status == 'false' )
+      return null;
+    $show     = $response->response;
+
+    $show = $this->formatShow($show);
+
+    return $show;
+  }
+
+  /**
    * Search a show by name
    *
    * @param $showName
@@ -38,6 +58,8 @@ class Bierdopje {
   public function getShowByName($showName)
   {
     $response = $this->request('/FindShowByName/' . $showName);
+    if ( $response->response->status == 'false' )
+      return null;
     $shows = $response->response->results->result;
 
     if ( count($shows) <= 0 )
@@ -60,6 +82,8 @@ class Bierdopje {
   public function getShowByTvdbId($tvdbId)
   {
     $response = $this->request('/GetShowByTVDBID/' . $tvdbId);
+    if ( $response->response->status == 'false' )
+      return null;
     $show     = $this->formatShow($response->response);
 
     return $show;
@@ -77,6 +101,8 @@ class Bierdopje {
   public function getEpisodesOfSeason($showId, $season)
   {
     $response = $this->request('/GetEpisodesForSeason/' . $showId . '/' . $season);
+    if ( $response->response->status == 'false' )
+      return null;
     $episodes = $response->response->results->result;
 
     if ( count($episodes) <= 0 )
@@ -100,6 +126,8 @@ class Bierdopje {
   public function getEpisodesOfShow($showId)
   {
     $response = $this->request('/GetAllEpisodesForShow/' . $showId);
+    if ( $response->response->status == 'false' )
+      return null;
     $episodes = $response->response->results->result;
 
     if ( count($episodes) <= 0 )
@@ -123,6 +151,8 @@ class Bierdopje {
   public function getEpisodeById($episodeId)
   {
     $response = $this->request('/GetEpisodeById/' . $episodeId);
+    if ( $response->response->status == 'false' )
+      return null;
     $episode  = $response->response->results;
     $episode  = $this->formatEpisode($episode);
 
@@ -150,7 +180,7 @@ class Bierdopje {
       : null;
     $show->season      = (int) $original->season;
     $show->episode     = (int) $original->episode;
-    $show->epNumber    = (int) $original->genres->epnumber;
+    $show->epNumber    = (int) $original->epnumber;
     $show->score       = (float) str_replace(',', '.', $original->score);
     $show->votes       = (int) $original->votes;
     $show->formatted   = (string) $original->formatted;
