@@ -20,11 +20,18 @@ class Bierdopje {
    * Create Bierdopje API instance
    *
    * @param Client $client
+   * @param null   $apiKey
+   *
+   * @throws \Exception
    */
-  public function __construct(Client $client)
+  public function __construct(Client $client, $apiKey = null)
   {
+    $apiKey = getenv('BD_APIKEY') ?: $apiKey;
+    if ( ! $apiKey )
+      throw new \Exception('Bierdopje Apikey not found in environment');
+
     $this->client = $client;
-    $this->url .= getenv('BD_APIKEY');
+    $this->url .= $apiKey;
   }
 
   /**
