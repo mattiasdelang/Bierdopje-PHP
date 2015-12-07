@@ -120,7 +120,14 @@ class Bierdopje extends PHPUnit_Framework_TestCase {
     $this->assertTrue(strlen($episode->summary) > 100, "summary has more than 100 characters");
   }
 
-
+  /**
+   * @vcr bierdopje.yml
+   */
+  public function test_it_formats_shows_without_next_airdate()
+  {
+    $show = $this->api->getShowBytvdbId(210411);
+    $this->assertNull($show->nextEpisode);
+  }
 }
 
 

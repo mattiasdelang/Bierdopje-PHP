@@ -145,7 +145,9 @@ class Bierdopje {
     $show->title       = (string) $original->title;
     $show->showlink    = (string) $original->showlink;
     $show->episodelink = (string) $original->episodelink;
-    $show->airDate     = Carbon::createFromFormat("d-m-Y", (string) $original->airdate);
+    $show->airDate     = strlen($original->airdate)
+      ? Carbon::createFromFormat("d-m-Y", (string) $original->airdate)
+      : null;
     $show->season      = (int) $original->season;
     $show->episode     = (int) $original->episode;
     $show->epNumber    = (int) $original->genres->epnumber;
@@ -173,9 +175,15 @@ class Bierdopje {
     $show->tvdbId      = (int) $original->tvdbid;
     $show->name        = (string) $original->showname;
     $show->link        = (string) $original->showlink;
-    $show->firstAired  = Carbon::createFromFormat('Y-m-d', (string) $original->firstaired);
-    $show->lastAired   = Carbon::createFromFormat('Y-m-d', (string) $original->lastaired);
-    $show->nextEpisode = Carbon::createFromFormat('Y-m-d', (string) $original->nextepisode);
+    $show->firstAired  = strlen($original->firstaired)
+      ? Carbon::createFromFormat('Y-m-d', (string) $original->firstaired)
+      : null;
+    $show->lastAired   = strlen($original->lastaired)
+      ? Carbon::createFromFormat('Y-m-d', (string) $original->lastaired)
+      : null;
+    $show->nextEpisode = strlen($original->nextepisode)
+      ? Carbon::createFromFormat('Y-m-d', (string) $original->nextepisode)
+      : null;
     $show->seasons     = (int) $original->seasons;
     $show->episodes    = (int) $original->episodes;
     $show->genres      = $original->genres->result;
