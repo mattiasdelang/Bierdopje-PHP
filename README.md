@@ -19,7 +19,7 @@ If your project:
 
 ### HTTP User-Agent
 Bierdopje requires all automated tools to specify a custom User-Agent when performing HTTP requests.
-So give your Http client a default User-Agent before passing it to the constructor:
+So give your Http client a default User-Agent before passing it to the constructor.
 
 ```PHP
 use mattiasdelang\Bierdopje as BierdopjeApi;
