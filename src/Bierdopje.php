@@ -160,7 +160,11 @@ class Bierdopje {
     $response = $this->request('/GetEpisodeById/' . $episodeId);
     if ( $response->response->status == 'false' )
       return null;
-    $episode  = $response->response->results;
+    if ($response->response->cached == 'false') {
+      $episode  = $response->response;
+    } else {
+      $episode  = $response->response->results;
+    }
     $episode  = $this->formatEpisode($episode);
 
     return $episode;
