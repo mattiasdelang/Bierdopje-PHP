@@ -197,6 +197,7 @@ class Bierdopje {
     $show->formatted   = (string) $original->formatted;
     $show->is_special  = ((string) $original->is_special) === "true";
     $show->summary     = (string) $original->summary;
+    $show->updated     = Carbon::createFromTimestamp((int) $original->updated);
 
     return $show;
   }
@@ -234,6 +235,7 @@ class Bierdopje {
     $show->showstatus  = (string) $original->showstatus;
     $show->airtime     = (string) $original->airtime;
     $show->summary     = (string) $original->summary;
+    $show->updated     = Carbon::createFromTimestamp((int) $original->updated);
     $genres = [];
     foreach ( $show->genres as $key => $genre ) {
       $genre    = (string) $genre;
