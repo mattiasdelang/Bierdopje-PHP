@@ -62,9 +62,9 @@ class Bierdopje {
    * @return null|\stdClass
    * @throws \Exception
    */
-  public function getShowByName($showName)
+  public function getShowByName($showName, $linkName = false)
   {
-    $response = $this->request('/FindShowByName/' . $showName);
+    $response = $this->request('/FindShowByName/' . $showName . '/' . $linkName);
     if ( $response->response->status == 'false' )
       return null;
     $shows = $response->response->results->result;
