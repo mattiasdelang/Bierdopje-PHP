@@ -23,6 +23,27 @@ class Bierdopje extends PHPUnit_Framework_TestCase {
   /**
    * @vcr bierdopje.yml
    */
+  public function test_it_searches_shows_by_name()
+  {
+    $show = $this->api->findShowByName('Arrow');
+
+    $this->assertEquals($show->id, 16290);
+    $this->assertEquals($show->tvdbId, 257655);
+    $this->assertEquals($show->name, "Arrow");
+    $this->assertEquals($show->firstAired->format('d-m-Y'), '10-10-2012');
+    #$this->assertEquals($show->lastAired->format('d-m-Y'), '18-11-2015');
+    #$this->assertEquals($show->nextEpisode->format('d-m-Y'), '27-01-2016');
+    $this->assertTrue($show->seasons >= 4, 'There are more than 4 seasons');
+    $this->assertTrue($show->episodes >= 93, 'There are more than 93 episodes');
+    $this->assertTrue(in_array('Action', $show->genres), 'Genres contains "Action"');
+    $this->assertTrue(in_array('Adventure', $show->genres), 'Genres contains "Adventure"');
+    $this->assertTrue(in_array('Crime', $show->genres), 'Genres contains "Crime"');
+    $this->assertTrue(strlen($show->summary) > 100, 'The summary has more than 100 chars');
+  }
+
+  /**
+   * @vcr bierdopje.yml
+   */
   public function test_it_fetches_shows_by_name()
   {
     $show = $this->api->getShowByName('Arrow');
@@ -38,6 +59,25 @@ class Bierdopje extends PHPUnit_Framework_TestCase {
     $this->assertTrue(in_array('Action', $show->genres), 'Genres contains "Action"');
     $this->assertTrue(in_array('Adventure', $show->genres), 'Genres contains "Adventure"');
     $this->assertTrue(in_array('Crime', $show->genres), 'Genres contains "Crime"');
+    $this->assertTrue(strlen($show->summary) > 100, 'The summary has more than 100 chars');
+  }
+
+  /**
+   * @vcr bierdopje.yml
+   */
+  public function test_it_fetches_shows_by_linkName()
+  {
+    $show = $this->api->getShowByName('las-vegas', true);
+
+    $this->assertEquals($show->id, 5202);
+    $this->assertEquals($show->tvdbId, 72229);
+    $this->assertEquals($show->name, "Las Vegas");
+    $this->assertEquals($show->firstAired->format('d-m-Y'), '22-09-2012');
+    $this->assertEquals($show->lastAired->format('d-m-Y'), '15-02-2008');
+    #$this->assertEquals($show->nextEpisode->format('d-m-Y'), '27-01-2016');
+    $this->assertTrue($show->seasons == 5, 'There are 5 seasons');
+    $this->assertTrue($show->episodes >= 93, 'There are 111 or more episodes');
+    $this->assertTrue(in_array('Adventure', $show->genres), 'Genres contains "Adventure"');
     $this->assertTrue(strlen($show->summary) > 100, 'The summary has more than 100 chars');
   }
 

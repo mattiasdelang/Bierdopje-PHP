@@ -62,9 +62,9 @@ class Bierdopje {
    * @return null|\stdClass
    * @throws \Exception
    */
-  public function getShowByName($showName, $linkName = false)
+  public function findShowByName($showName)
   {
-    $response = $this->request('/FindShowByName/' . $showName . '/' . $linkName);
+    $response = $this->request('/FindShowByName/' . $showName);
     if ( $response->response->status == 'false' )
       return null;
     $shows = $response->response->results->result;
@@ -73,6 +73,27 @@ class Bierdopje {
       return null;
 
     $show = $shows[0];
+    $show = $this->formatShow($show);
+
+    return $show;
+  }
+
+  /**
+   * Get a show by exact name.
+   *
+   * @param string $showName
+   * @param bool   $isLinkName
+   *
+   * @return null|\stdClass
+   * @throws \Exception
+   */
+  public function getShowByName($showName, $isLinkName = false)
+  {
+    $response = $this->request('/GetShowByName/' . $showName . '/' . $isLinkName);
+    if ( $response->response->status == 'false' )
+      return null;
+    $show = $response->response;
+
     $show = $this->formatShow($show);
 
     return $show;
