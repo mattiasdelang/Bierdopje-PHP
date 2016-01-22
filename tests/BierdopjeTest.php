@@ -72,7 +72,7 @@ class Bierdopje extends PHPUnit_Framework_TestCase {
     $this->assertEquals($show->id, 5202);
     $this->assertEquals($show->tvdbId, 72229);
     $this->assertEquals($show->name, "Las Vegas");
-    $this->assertEquals($show->firstAired->format('d-m-Y'), '22-09-2012');
+    $this->assertEquals($show->firstAired->format('d-m-Y'), '22-09-2003');
     $this->assertEquals($show->lastAired->format('d-m-Y'), '15-02-2008');
     #$this->assertEquals($show->nextEpisode->format('d-m-Y'), '27-01-2016');
     $this->assertTrue($show->seasons == 5, 'There are 5 seasons');
